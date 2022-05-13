@@ -1,39 +1,37 @@
 from PythonFiles.Utilities.SearchAlgorithms import bfs
-from PythonFiles.Utilities.Utilities import gcd
-
-from sys import exit
-
-from PythonFiles.Utilities.Constants import MSG_SELECT_GAME
+from PythonFiles.Utilities.Utilities import gcd, _exit
 
 
-def _exit():
-    print("Thank you for using our application.")
-    exit()
+from PythonFiles.Utilities.Constants import MSG_SELECT_GAME, ALLOWED_ANSWERS, DEFAULT_ANSWER
+from PythonFiles.Utilities.Constants import MSG_INPUT_1, MSG_INPUT_2, MSG_INPUT_TARGET, MSG_NO_POSSIBLE_SOLUTION_WATER
 
 
 def jugsProblem():
-    x_capacity = input("Enter Jug 1 capacity:")
-    y_capacity = input("Enter Jug 2 capacity:")
-    end = input("Enter target volume:")
-    start = [0, 0]
+    jug_1_capacity = int(input(MSG_INPUT_1))
+    jug_2_capacity = int(input(MSG_INPUT_2))
+    final_destination = int(input(MSG_INPUT_TARGET))
 
-    if end % gcd(x_capacity, y_capacity) == 0:
-        print("Solution for water jug problem")
-        print(bfs(start, end, x_capacity, y_capacity))
-    else:
-        print("No solution possible for this combination.")
+    if final_destination % gcd(jug_1_capacity, jug_2_capacity) != 0:
+        print(MSG_NO_POSSIBLE_SOLUTION_WATER)
+        return
+
+    print(bfs(final_destination, jug_1_capacity, jug_2_capacity))
 
 
 def blockWorld():
-    print()
+    print("Block world problem")
 
 
 def showMenu():
-    problem = str(input(MSG_SELECT_GAME))
+    flag, problem = True, DEFAULT_ANSWER
+    while flag:
+        problem = str(input(MSG_SELECT_GAME))
+        if problem in ALLOWED_ANSWERS:
+            flag = False
 
     if problem == "1":
-        print("1")
+        jugsProblem()
     elif problem == "2":
-        print("2")
+        blockWorld()
     elif problem.upper() == "Q":
         _exit()

@@ -15,5 +15,7 @@ MSG_FOUND_SOLUTION_WATER = "[!] Solution for water pouring problem [!]"
 MSG_NO_SOLUTION_WATER = "[X] No solution found for this combination [X]"
 MSG_NO_POSSIBLE_SOLUTION_WATER = "[X] No possible solution for this combination [X]"
 
-
+# SEARCH
+#   -> RBFS
+INFINITY = float('inf')
 
